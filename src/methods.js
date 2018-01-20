@@ -12,6 +12,10 @@ exports.getTotalDiskUsage = getTotalDiskUsage
  ** ---- All Methods --- **
  \**************************/
 
+function replaceAll (target, search, replacement) {
+  return target.replace(new RegExp(search, 'g'), replacement)
+}
+
 function search () {
   console.log()
   console.log('Searching for node_modules... 🔦')
@@ -32,7 +36,7 @@ function getDiskUsage (filteredDirectories) {
   )
   const filteredDirectoriesSizes = filteredDirectories
     .map(dir =>
-      execSync(`du -hs ${dir.replace(' ', '\\ ')}`)
+      execSync(`du -hs ${replaceAll(dir, ' ', '\\ ')}`)
         .toString()
         .split('\n')
         .join('')
