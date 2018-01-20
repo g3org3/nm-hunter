@@ -23,6 +23,9 @@ Working... this might take some minutes ⏱
 -------------
 ⚠️ 134M	./node_modules
 ✅   0B	./src/__mocks__/node_modules
+
+total used: 134M
+   it took: 220 milliseconds
 ```
 
 ## Development
