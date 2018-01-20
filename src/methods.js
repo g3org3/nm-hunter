@@ -1,5 +1,6 @@
 // Dependencies
 const { execSync } = require('child_process')
+const prettyMs = require('pretty-ms')
 
 // Exports
 exports.nmHunter = nmHunter
@@ -24,7 +25,11 @@ function search () {
 }
 
 function getDiskUsage (filteredDirectories) {
-  console.log('Working... this might take some minutes ⏱')
+  console.log(
+    `Found(${
+      filteredDirectories.length
+    })... Now getting disk usage, this might take some minutes ⏱`
+  )
   const filteredDirectoriesSizes = filteredDirectories
     .map(dir =>
       execSync(`du -hs ${dir.replace(' ', '\\ ')}`)
@@ -100,12 +105,17 @@ function prettyPrintResults (filteredDirectoriesSizes) {
     }
     console.log(alert ? '⚠️' : '✅', raw)
   })
-  console.log(`total: ${size}${metric}`)
   console.log()
+  console.log(`total used: ${size}${metric}`)
 }
 
 function nmHunter () {
+  const start = new Date()
   const directories = search()
   const direcotiesSizes = getDiskUsage(directories)
   prettyPrintResults(direcotiesSizes)
+  const end = new Date()
+  const duration = prettyMs(end - start, { verbose: true })
+  console.log(`   it took: ${duration}`)
+  console.log()
 }
