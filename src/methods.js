@@ -5,6 +5,7 @@ const { execSync } = require('child_process')
 exports.nmHunter = nmHunter
 exports.search = search
 exports.getDiskUsage = getDiskUsage
+exports.getTotalDiskUsage = getTotalDiskUsage
 
 /** ************************\
  ** ---- All Methods --- **
@@ -42,7 +43,47 @@ function getDiskUsage (filteredDirectories) {
   return filteredDirectoriesSizes
 }
 
+function getTotalDiskUsage (filteredDirectoriesSizes) {
+  let size = filteredDirectoriesSizes
+    .map(dir => {
+      let byteSize = dir.size
+      switch (dir.metric) {
+        case 'K':
+          byteSize *= 1024
+          break
+        case 'M':
+          byteSize *= 1024 * 1024
+          break
+        case 'G':
+          byteSize *= 1024 * 1024 * 1024
+          break
+      }
+      return byteSize
+    })
+    .reduce((sum, size) => sum + size, 0)
+
+  let metric = 'B'
+  if (size > 1024) {
+    metric = 'K'
+    size /= 1024
+  }
+  if (size > 1024) {
+    metric = 'M'
+    size /= 1024
+  }
+  if (size > 1024) {
+    metric = 'G'
+    size /= 1024
+  }
+  return { size: floor(size), metric }
+}
+
+function floor (n) {
+  return Math.floor(n * 100) / 100
+}
+
 function prettyPrintResults (filteredDirectoriesSizes) {
+  const { size, metric } = getTotalDiskUsage(filteredDirectoriesSizes)
   console.log()
   console.log('⚡️ Found!')
   console.log('-------------')
@@ -59,6 +100,7 @@ function prettyPrintResults (filteredDirectoriesSizes) {
     }
     console.log(alert ? '⚠️' : '✅', raw)
   })
+  console.log(`total: ${size}${metric}`)
   console.log()
 }
 

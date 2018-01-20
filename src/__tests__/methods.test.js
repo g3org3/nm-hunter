@@ -1,4 +1,5 @@
-const { search, getDiskUsage } = require('../methods')
+const { search, getDiskUsage, getTotalDiskUsage } = require('../methods')
+const { mockA } = require('../__mocks__/directoriesSizes')
 const { keys } = Object
 console.log = () => {}
 
@@ -23,5 +24,10 @@ describe('Search Tests', () => {
     expect(diskUsages[0].metric).toEqual('M')
     expect(diskUsages[1].metric).toEqual('K')
     expect(diskUsages[1].size).toEqual(4)
+  })
+
+  it('should get the total amout of disk usage of all NMs | mock', () => {
+    const total = getTotalDiskUsage(mockA)
+    expect(total).toEqual({ size: 1.61, metric: 'G' })
   })
 })
