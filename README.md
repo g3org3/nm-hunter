@@ -4,7 +4,7 @@
 ✨💀👻 a node_modules hunter cli
 
 ## Getting Started
-You will need Node >= 6 installed. [How do I install node? click here to find out about nvm](https://github.com/creationix/nvm#installation)
+You will need Node >= 7 installed. [How do I install node? click here to find out about nvm](https://github.com/creationix/nvm#installation)
 
 ### Installation
 Install the yagg globally
