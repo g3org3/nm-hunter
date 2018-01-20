@@ -1,0 +1,4 @@
+#!/bin/sh
+if [[ -d ".git" ]]; then
+  cp pre-commit.sh .git/hooks/pre-commit
+fi

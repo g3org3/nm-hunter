@@ -4,11 +4,22 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:watch": "jest --watch",
+    "test": "npm run lint && jest",
+    "lint": "eslint .",
+    "format": "prettier-eslint --write \"src/**/*.js\"",
+    "preinstall": "./.githooks"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/g3org3/nm-hunter.git"
+  },
+  "files": [
+    "src",
+    "package.json"
+  ],
+  "bin": {
+    "nm-hunter": "src/index.js"
   },
   "keywords": [],
   "author": "George <7jagjag@gmail.com>",
@@ -17,7 +28,17 @@
     "url": "https://github.com/g3org3/nm-hunter/issues"
   },
   "homepage": "https://github.com/g3org3/nm-hunter#readme",
+  "devDependencies": {
+    "eslint": "~4.16.0",
+    "eslint-config-standard": "~11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "~3.0.1",
+    "jest": "~22.1.4",
+    "prettier-eslint-cli": "~4.7.0"
+  },
   "dependencies": {
-    "commander": "^2.13.0"
+    "commander": "~2.13.0"
   }
 }
