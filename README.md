@@ -1,7 +1,7 @@
 [![Build Status][travis]][travis-url]
 [![npm package][npm-image]](npm-url)
 # nm-hunter
-✨ a node_modules hunter cli
+✨💀👻 a node_modules hunter cli
 
 ## Getting Started
 You will need Node >= 6 installed. [How do I install node? click here to find out about nvm](https://github.com/creationix/nvm#installation)
