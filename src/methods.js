@@ -24,12 +24,21 @@ function search () {
 
 function getDiskUsage (filteredDirectories) {
   console.log('Working... this might take some minutes ⏱')
-  const filteredDirectoriesSizes = filteredDirectories.map(dir =>
-    execSync(`du -hs ${dir.replace(' ', '\\ ')}`)
-      .toString()
-      .split('\n')
-      .join('')
-  )
+  const filteredDirectoriesSizes = filteredDirectories
+    .map(dir =>
+      execSync(`du -hs ${dir.replace(' ', '\\ ')}`)
+        .toString()
+        .split('\n')
+        .join('')
+    )
+    .map(line => {
+      // e.g. 134M\t./node_modules
+      const nmPath = line.split('\t')[1]
+      const sizeStr = line.split('\t')[0]
+      const size = Number(sizeStr.substr(0, sizeStr.length - 1))
+      const metric = sizeStr.substr(sizeStr.length - 1)
+      return { size, metric, nmPath, raw: line }
+    })
   return filteredDirectoriesSizes
 }
 
@@ -38,12 +47,17 @@ function prettyPrintResults (filteredDirectoriesSizes) {
   console.log('⚡️ Found!')
   console.log('-------------')
   filteredDirectoriesSizes.map(dir => {
-    const size = dir.split('\t').filter(w => w)[0]
-    const MBsize = Number(size.split('M')[0])
-    const GBsize = Number(size.split('G')[0])
-    if (MBsize > 100 || GBsize > 0) {
-      console.log('⚠️', dir)
-    } else console.log('✅', dir)
+    const { size, metric, raw } = dir
+    let alert = false
+    switch (metric) {
+      case 'M':
+        alert = size > 99
+        break
+      case 'G':
+        alert = true
+        break
+    }
+    console.log(alert ? '⚠️' : '✅', raw)
   })
   console.log()
 }
