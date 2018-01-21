@@ -17,7 +17,8 @@
   },
   "files": [
     "src",
-    "package.json"
+    "package.json",
+    ".githooks"
   ],
   "bin": {
     "nm-hunter": "src/index.js"
