@@ -9,7 +9,7 @@
     "test": "npm run lint && jest",
     "lint": "eslint .",
     "format": "prettier-eslint --write \"src/**/*.js\"",
-    "preinstall": "./.githooks"
+    "githooks": "./.githooks"
   },
   "repository": {
     "type": "git",
