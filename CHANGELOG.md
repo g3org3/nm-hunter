@@ -7,7 +7,8 @@
 
 ## 0.1.0 (2018-01-22)
 #### Enhancement
-* added sort option
+* added sort option, sort: ASC
+* added warning option, to display only nm with higher size
 
 ## 0.0.4 (2018-01-21)
 #### Bug fix
