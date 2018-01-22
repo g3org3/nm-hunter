@@ -105,7 +105,6 @@ function sortByFolderSize (filteredDirectoriesSizes) {
 }
 
 function prettyPrintResults (filteredDirectoriesSizes) {
-  const { size, metric } = getTotalDiskUsage(filteredDirectoriesSizes)
   console.log()
   console.log('⚡️ Found!')
   console.log('-------------')
@@ -123,17 +122,24 @@ function prettyPrintResults (filteredDirectoriesSizes) {
     console.log(alert ? '⚠️ ' : '✅ ', raw)
   })
   console.log()
+  const { size, metric } = getTotalDiskUsage(filteredDirectoriesSizes)
   console.log(`total used: ${size}${metric}`)
 }
 
-function nmHunter ({ sort }) {
+function nmHunter ({ warning, sort }) {
   const start = new Date()
+
   const directories = search()
   const directoriesSizes = getDiskUsage(directories)
   const directoriesSizesSorted = sort
     ? sortByFolderSize(directoriesSizes)
     : directoriesSizes
-  prettyPrintResults(directoriesSizesSorted)
+  const directoriesSizesSortedFiltered = warning
+    ? directoriesSizesSorted.filter(dir => dir.bytes > 99 * 1024 * 1024)
+    : directoriesSizesSorted
+
+  prettyPrintResults(directoriesSizesSortedFiltered)
+
   const end = new Date()
   const duration = prettyMs(end - start, { verbose: true })
   console.log(`   it took: ${duration}`)
