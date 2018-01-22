@@ -7,6 +7,8 @@ exports.nmHunter = nmHunter
 exports.search = search
 exports.getDiskUsage = getDiskUsage
 exports.getTotalDiskUsage = getTotalDiskUsage
+exports.sortByFileSize = sortByFileSize
+exports.getByteSize = getByteSize
 
 /** ************************\
  ** ---- All Methods --- **
@@ -47,28 +49,16 @@ function getDiskUsage (filteredDirectories) {
       const sizeStr = line.split('\t')[0]
       const size = Number(sizeStr.substr(0, sizeStr.length - 1))
       const metric = sizeStr.substr(sizeStr.length - 1)
-      return { size, metric, nmPath, raw: line }
+      const bytes = getByteSize({ size, metric })
+
+      return { size, metric, nmPath, raw: line, bytes }
     })
   return filteredDirectoriesSizes
 }
 
 function getTotalDiskUsage (filteredDirectoriesSizes) {
   let size = filteredDirectoriesSizes
-    .map(dir => {
-      let byteSize = dir.size
-      switch (dir.metric) {
-        case 'K':
-          byteSize *= 1024
-          break
-        case 'M':
-          byteSize *= 1024 * 1024
-          break
-        case 'G':
-          byteSize *= 1024 * 1024 * 1024
-          break
-      }
-      return byteSize
-    })
+    .map(dir => dir.bytes)
     .reduce((sum, size) => sum + size, 0)
 
   let metric = 'B'
@@ -89,6 +79,29 @@ function getTotalDiskUsage (filteredDirectoriesSizes) {
 
 function floor (n) {
   return Math.floor(n * 100) / 100
+}
+
+function getByteSize ({ size, metric }) {
+  let byteSize = size
+  switch (metric) {
+    case 'K':
+      byteSize *= 1024
+      break
+    case 'M':
+      byteSize *= 1024 * 1024
+      break
+    case 'G':
+      byteSize *= 1024 * 1024 * 1024
+      break
+    case 'T':
+      byteSize *= 1024 * 1024 * 1024 * 1024
+      break
+  }
+  return byteSize
+}
+
+function sortByFileSize (filteredDirectoriesSizes) {
+  return filteredDirectoriesSizes.sort((a, b) => b.bytes - a.bytes)
 }
 
 function prettyPrintResults (filteredDirectoriesSizes) {
