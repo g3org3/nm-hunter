@@ -7,7 +7,7 @@ exports.nmHunter = nmHunter
 exports.search = search
 exports.getDiskUsage = getDiskUsage
 exports.getTotalDiskUsage = getTotalDiskUsage
-exports.sortByFileSize = sortByFileSize
+exports.sortByFolderSize = sortByFolderSize
 exports.getByteSize = getByteSize
 
 /** ************************\
@@ -100,7 +100,7 @@ function getByteSize ({ size, metric }) {
   return byteSize
 }
 
-function sortByFileSize (filteredDirectoriesSizes) {
+function sortByFolderSize (filteredDirectoriesSizes) {
   return filteredDirectoriesSizes.sort((a, b) => b.bytes - a.bytes)
 }
 
@@ -120,17 +120,20 @@ function prettyPrintResults (filteredDirectoriesSizes) {
         alert = true
         break
     }
-    console.log(alert ? '⚠️' : '✅', raw)
+    console.log(alert ? '⚠️ ' : '✅ ', raw)
   })
   console.log()
   console.log(`total used: ${size}${metric}`)
 }
 
-function nmHunter () {
+function nmHunter ({ sort }) {
   const start = new Date()
   const directories = search()
-  const direcotiesSizes = getDiskUsage(directories)
-  prettyPrintResults(direcotiesSizes)
+  const directoriesSizes = getDiskUsage(directories)
+  const directoriesSizesSorted = sort
+    ? sortByFolderSize(directoriesSizes)
+    : directoriesSizes
+  prettyPrintResults(directoriesSizesSorted)
   const end = new Date()
   const duration = prettyMs(end - start, { verbose: true })
   console.log(`   it took: ${duration}`)

@@ -7,7 +7,7 @@ const {
   search,
   getDiskUsage,
   getTotalDiskUsage,
-  sortByFileSize,
+  sortByFolderSize,
   getByteSize
 } = require('../methods')
 
@@ -46,7 +46,7 @@ describe('Search Tests', () => {
   })
 
   it('should sort the files from larger to smaller files', () => {
-    const result = sortByFileSize(mockA)
+    const result = sortByFolderSize(mockA)
     let passed = true
     for (var i = 1; i < result.length; i++) {
       const current = result[i].bytes
