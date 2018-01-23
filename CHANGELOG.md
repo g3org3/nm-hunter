@@ -1,9 +1,17 @@
 # Changelog
-
+<!--
 ## Next
 #### Enhancement
 #### Bug fix
 #### Internal
+-->
+
+## 0.1.2 (2018-01-23)
+#### Enhancement
+* cross platform support
+* fancy loader
+#### Internal
+* refactors
 
 ## 0.1.0 (2018-01-22)
 #### Enhancement

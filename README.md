@@ -13,18 +13,34 @@ npm install -g nm-hunter
 
 # Usage
 ```sh
-$ nm-hunter
+➜  cd ~
+➜  nm-hunter
+⠏ Hunting wild node_modules: 102 MB
 
-Searching for node_modules... 🔦
-Working... this might take some minutes ⏱
+. . .
 
 ⚡️ Found!
--------------
-⚠️ 134M	./node_modules
-✅   0B	./src/__mocks__/node_modules
+------------
+⚠️ 134 MB ./node_modules
+✅    0 B ./src/__mocks__/node_modules
 
-total used: 134M
+total used: 134 MB
    it took: 220 milliseconds
+
+. . .
+
+➜  nm-hunter --help
+
+  Usage: nm-hunter [options]
+
+
+  Options:
+
+    -V, --version  output the version number
+    -v, --version  output the version number
+    -s, --sort     sort the node_modules in ASC
+    -w --warning   only display node_modules above 99M
+    -h, --help     output usage information
 ```
 
 ## Development
