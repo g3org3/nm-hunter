@@ -1,5 +1,8 @@
 #! /usr/bin/env node
 
+require('util.promisify').shim()
+require('array-includes').shim()
+
 const program = require('commander')
 const { version } = require('../package.json')
 const { nmHunter } = require('./methods')
@@ -13,6 +16,6 @@ program.parse(process.argv)
 nmHunter({ warning: program.warning, sort: program.sort })
 
 // catch ctrl+c event and exit normally
-process.on('SIGINT', function () {
-  console.log(' Exiting gracefully ...')
-})
+// process.on('SIGINT', function () {
+//   console.log(' Exiting gracefully ...')
+// })
