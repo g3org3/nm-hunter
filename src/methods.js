@@ -4,7 +4,7 @@ const path = require('path')
 const utils = require('./utils')
 const ora = require('ora')
 
-const spinner = ora('Hunting wild node_modules').start()
+const spinner = ora('Hunting wild node_modules')
 let fullSize = 0
 const checkFile = file =>
   utils.lstat(file).then(stats => {
@@ -36,6 +36,15 @@ const search = directory => {
   )
 }
 
+function padding (str) {
+  const padSize = 9
+  if (str.length <= padSize) {
+    return new Array(padSize - str.length).join(' ') + str + '  '
+  } else {
+    return str + ' '
+  }
+}
+
 function prettyPrintResults (directories, warning) {
   console.log()
   console.log('⚡️ Found!')
@@ -43,7 +52,7 @@ function prettyPrintResults (directories, warning) {
   directories.map(({ file, size }) => {
     let alert = 99 * 1024 * 1024 < size
     if (!warning || alert) {
-      console.log(alert ? '⚠️' : '✅', prettyBytes(size), file)
+      console.log(alert ? '⚠️' : '✅', `${padding(prettyBytes(size))}${file}`)
     }
   })
   console.log()
@@ -56,11 +65,11 @@ function sortByFileSize (directories) {
 
 function nmHunter ({ warning, sort }) {
   const start = new Date()
-
+  spinner.start()
   search(process.cwd())
     .then(directories => {
+      spinner.clear()
       spinner.stop()
-      console.log(sort)
       prettyPrintResults(
         sort ? sortByFileSize(directories) : directories,
         warning

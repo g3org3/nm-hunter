@@ -14,8 +14,3 @@ program.parse(process.argv)
 
 // Search for node_modules
 nmHunter({ warning: program.warning, sort: program.sort })
-
-// catch ctrl+c event and exit normally
-// process.on('SIGINT', function () {
-//   console.log(' Exiting gracefully ...')
-// })

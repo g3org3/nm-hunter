@@ -7,6 +7,9 @@ const isWin = /^win/.test(process.platform)
 
 const exec = util.promisify(childProcess.exec)
 
+const replaceAll = (target, search, replacement) =>
+  target.replace(new RegExp(search, 'g'), replacement)
+
 function getByteSize (sizeStr) {
   const size = Number(sizeStr.substr(0, sizeStr.length - 1))
   const metric = sizeStr.substr(sizeStr.length - 1)
@@ -37,7 +40,7 @@ exports.du = file => {
   if (isWin) {
     return du(file, { disk: true })
   }
-  return exec(`du -sh ${file}`).then(result =>
-    getByteSize(result.stdout.split('\t')[0])
+  return exec(`du -sh ${replaceAll(file, ' ', '\\ ')}`).then(result =>
+    getByteSize(result.split('\t')[0])
   )
 }
