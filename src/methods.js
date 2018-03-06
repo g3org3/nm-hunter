@@ -36,7 +36,7 @@ const search = directory => {
   )
 }
 
-function padding (str) {
+const padding = str => {
   const padSize = 9
   if (str.length <= padSize) {
     return new Array(padSize - str.length).join(' ') + str + '  '
@@ -45,7 +45,7 @@ function padding (str) {
   }
 }
 
-function prettyPrintResults (directories, warning) {
+const prettyPrintResults = (directories, warning) => {
   console.log()
   console.log('⚡️ Found!')
   console.log('-------------')
@@ -59,9 +59,8 @@ function prettyPrintResults (directories, warning) {
   console.log(`total used: ${prettyBytes(fullSize)}`)
 }
 
-function sortByFileSize (directories) {
-  return directories.sort((a, b) => b.size - a.size)
-}
+const sortByFileSize = directories =>
+  directories.sort((a, b) => b.size - a.size)
 
 function nmHunter ({ warning, sort }) {
   const start = new Date()

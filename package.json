@@ -9,7 +9,7 @@
     "test": "npm run lint && jest",
     "lint": "eslint .",
     "format": "prettier-eslint --write \"src/**/*.js\"",
-    "githooks": "./.githooks"
+    "githooks": "chmod +x .githooks && ./.githooks"
   },
   "repository": {
     "type": "git",
@@ -17,8 +17,7 @@
   },
   "files": [
     "src",
-    "package.json",
-    ".githooks"
+    "package.json"
   ],
   "bin": {
     "nm-hunter": "src/index.js"
