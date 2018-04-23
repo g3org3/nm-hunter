@@ -62,7 +62,7 @@ const prettyPrintResults = (directories, warning) => {
 const sortByFileSize = directories =>
   directories.sort((a, b) => b.size - a.size)
 
-function nmHunter ({ warning, sort }) {
+function nmHunter ({ warning, sort } = {}) {
   const start = new Date()
   spinner.start()
   search(process.cwd())
@@ -78,7 +78,11 @@ function nmHunter ({ warning, sort }) {
       console.log(`   it took: ${duration}`)
       console.log()
     })
-    .catch(console.log)
+    .catch(err => {
+      spinner.clear()
+      spinner.stop()
+      console.log(err)
+    })
 }
 
 exports.nmHunter = nmHunter

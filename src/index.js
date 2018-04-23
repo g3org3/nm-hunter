@@ -13,4 +13,5 @@ program.option('-w --warning', 'only display node_modules above 99M')
 program.parse(process.argv)
 
 // Search for node_modules
-nmHunter({ warning: program.warning, sort: program.sort })
+const { warning, sort } = program
+nmHunter({ warning, sort })
