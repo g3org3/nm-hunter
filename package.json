@@ -8,17 +8,13 @@
     "test:watch": "jest --watch",
     "test": "npm run lint && jest",
     "lint": "eslint .",
-    "format": "prettier-eslint --write \"src/**/*.js\"",
-    "githooks": "chmod +x .githooks && ./.githooks"
+    "precommit": "pretty-quick --staged"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/g3org3/nm-hunter.git"
   },
-  "files": [
-    "src",
-    "package.json"
-  ],
+  "files": ["src", "package.json"],
   "bin": {
     "nm-hunter": "src/index.js"
   },
@@ -30,14 +26,20 @@
   },
   "homepage": "https://github.com/g3org3/nm-hunter#readme",
   "devDependencies": {
-    "eslint": "~4.16.0",
-    "eslint-config-standard": "~11.0.0-beta.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "~3.0.1",
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-plugin-flowtype": "^2.46.3",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "husky": "^0.14.3",
     "jest": "~22.1.4",
-    "prettier-eslint-cli": "~4.7.0"
+    "prettier": "^1.12.1",
+    "prettier-eslint-cli": "~4.7.0",
+    "pretty-quick": "^1.4.1"
   },
   "dependencies": {
     "array-includes": "^3.0.3",

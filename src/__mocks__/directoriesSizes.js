@@ -15,8 +15,8 @@ exports.mockA = [
   { size: 80, metric: 'M', bytes: 80 * 1024 * 1024 },
   { size: 81, metric: 'M', bytes: 81 * 1024 * 1024 },
   { size: 92, metric: 'M', bytes: 92 * 1024 * 1024 },
-  { size: 210, metric: 'M', bytes: 210 * 1024 * 1024 }
-]
+  { size: 210, metric: 'M', bytes: 210 * 1024 * 1024 },
+];
 
 exports.mockASorted = [
   { bytes: 220200960, metric: 'M', size: 210 },
@@ -35,5 +35,5 @@ exports.mockASorted = [
   { bytes: 6396313.6, metric: 'M', size: 6.1 },
   { bytes: 925696, metric: 'K', size: 904 },
   { bytes: 4096, metric: 'K', size: 4 },
-  { bytes: 0, metric: 'B', size: 0 }
-]
+  { bytes: 0, metric: 'B', size: 0 },
+];

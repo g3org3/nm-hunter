@@ -1,7 +1,14 @@
 {
-  "extends": "standard",
-  "env": {
-    "node": true,
-    "jest": true
+  "extends": ["react-app", "plugin:prettier/recommended"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "all"
+      }
+    ],
+    "react/react-in-jsx-scope": "0",
+    "jsx-a11y/href-no-hash": "0"
   }
 }
