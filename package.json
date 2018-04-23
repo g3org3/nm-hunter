@@ -1,6 +1,6 @@
 {
   "name": "nm-hunter",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -14,7 +14,10 @@
     "type": "git",
     "url": "git+https://github.com/g3org3/nm-hunter.git"
   },
-  "files": ["src", "package.json"],
+  "files": [
+    "src",
+    "package.json"
+  ],
   "bin": {
     "nm-hunter": "src/index.js"
   },
