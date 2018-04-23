@@ -88,3 +88,4 @@ function nmHunter({ warning, sort } = {}) {
 
 exports.nmHunter = nmHunter;
 exports.search = search;
+exports.padding = padding;
