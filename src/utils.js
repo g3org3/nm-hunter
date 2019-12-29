@@ -45,6 +45,6 @@ exports.du = file => {
     return du(file, { disk: true });
   }
   return exec(`du -sh ${normalize(file)}`).then(result =>
-    getByteSize((result.stdout || result).split('\t')[0]),
+    getByteSize((result.stdout || result).split('\t')[0])
   );
 };

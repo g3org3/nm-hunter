@@ -31,8 +31,8 @@ const search = directory => {
           const fullPath = path.resolve(directory, file);
           return checkFile(fullPath).then(directories.concat.bind(directories));
         }),
-      Promise.resolve([]),
-    ),
+      Promise.resolve([])
+    )
   );
 };
 
@@ -60,8 +60,7 @@ const prettyPrintResults = (directories, warning) => {
   console.log(`total used: ${prettyBytes(fullSize)}`);
 };
 
-const sortByFileSize = directories =>
-  directories.sort((a, b) => b.size - a.size);
+const sortByFileSize = directories => directories.sort((a, b) => b.size - a.size);
 
 function nmHunter({ warning, sort } = {}) {
   const start = new Date();
@@ -70,10 +69,7 @@ function nmHunter({ warning, sort } = {}) {
     .then(directories => {
       spinner.clear();
       spinner.stop();
-      prettyPrintResults(
-        sort ? sortByFileSize(directories) : directories,
-        warning,
-      );
+      prettyPrintResults(sort ? sortByFileSize(directories) : directories, warning);
       const end = new Date();
       const duration = prettyMs(end - start, { verbose: true });
       console.log(`   it took: ${duration}`);
