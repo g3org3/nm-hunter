@@ -1,3 +1,4 @@
+/* global describe it expect */
 const { padding } = require('../methods');
 
 describe('methods', () => {

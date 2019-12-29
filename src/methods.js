@@ -47,10 +47,10 @@ const padding = str => {
 
 const prettyPrintResults = (directories, warning) => {
   console.log();
-  console.log('⚡️ Found!');
+  console.log('⚡️  Found!');
   console.log('-------------');
   directories.map(({ file, size }) => {
-    let alert = 99 * 1024 * 1024 < size;
+    const alert = 99 * 1024 * 1024 < size;
     if (!warning || alert) {
       console.log(alert ? '⚠️' : '✅', `${padding(prettyBytes(size))}${file}`);
     }
